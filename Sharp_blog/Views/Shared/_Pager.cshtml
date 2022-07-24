@@ -1,0 +1,56 @@
+﻿@model Sharp_blog.Models.ListViewModel
+
+@* Read current pageNo and total page count*@
+@{
+    var currentPageNo = ViewContext.RequestContext.HttpContext.Request["p"] != null
+        ? int.Parse(ViewContext.RequestContext.HttpContext.Request["p"])
+        : 1;
+
+    var pageCount = Math.Ceiling((double) Model.PostCount / 10);
+}
+
+@* Check if we need to display pagination links *@
+@{
+    var prev = $"p={currentPageNo - 1}";
+    var next = $"p={currentPageNo + 1}";
+
+    @* If the view is rendered for "Search" action append the pagination value with "&" *@
+    if (ViewContext.RouteData.Values["action"].ToString()
+        .Equals("search", StringComparison.OrdinalIgnoreCase))
+    {
+        var s = String.Format("?s={0}",
+            ViewContext.RequestContext.HttpContext.Request.QueryString["s"]);
+
+        prev = $"{s}&{prev}";
+        next = $"{s}&{next}";
+    }
+    else
+    {
+        prev = $"?{prev}";
+        next = $"?{next}";
+    }
+    
+    <!-- pagination links -->
+    <div class="pager">
+        <a href="@prev" title="Previous" class="previous"
+           style="visibility: @(currentPageNo > 1 ? "visible" : "collapse")">
+            << previous
+        </a>
+        
+        <a href="@next" title="Next" class="next"
+                   style="visibility: @(currentPageNo < pageCount ? "visible" : "collapse")">
+            next >>
+        </a>
+    </div>
+}
+
+
+
+
+
+
+
+
+
+
+

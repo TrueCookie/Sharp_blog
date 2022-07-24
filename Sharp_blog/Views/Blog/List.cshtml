@@ -4,15 +4,23 @@
     Layout = null;
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-      
+<div id="content">
+    <h1>@ViewBag.Title</h1>
+    
+    @Html.Partial("_Pager", Model)
+    
+    @if (Model.PostCount > 0)
+    {
+        foreach (var post in Model.Posts)
+        {
+            @Html.Partial("_PostTemplate", post)
+        }
+    }
+    else
+    {
+        <p>There is no posts yet(((</p>
+    }
+    
+    @Html.Partial("_Pager", Model)
+    
 </div>
-</body>
-</html>

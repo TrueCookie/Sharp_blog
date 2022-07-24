@@ -46,5 +46,15 @@ namespace Sharp_blog
                     title = $"See all posts in {tag.Name}"
                 });
         }
+
+        public static MvcHtmlString Image(this HtmlHelper helper, string src, string alt)
+        {
+            var image = new TagBuilder("img");
+            image.MergeAttribute("src", src);
+            image.MergeAttribute("alt", alt);
+            
+            return MvcHtmlString.Create(
+                image.ToString(TagRenderMode.SelfClosing));
+        }
     }
 }

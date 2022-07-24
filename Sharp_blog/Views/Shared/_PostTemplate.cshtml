@@ -34,19 +34,20 @@
  
     <!--Short Description-->
     <div class="post-body">
-        @Html.Raw(Model.ShortDescription)
+        @Html.Raw((string) Model.ShortDescription)
     </div>
  
     <div class="post-foot">
-        @Html.ActionLink("continue...", "post", "blog",
+        @* todo: code duplicate - @Html.PostLink(Model) *@
+        @Html.ActionLink("continue...", "GetPosts", "Blog",
             new
             {
-                year = Model.PostedOn.Year,
-                month = Model.PostedOn.Month,
-                day = Model.PostedOn.Day,
+                year = Model.PublishDate.Year,
+                month = Model.PublishDate.Month,
+                day = Model.PublishDate.Day,
                 title = Model.UrlSlug
             },
-            new { title = "continue..." }
+            new {title = "continue..."}
             )
     </div>
 </div>

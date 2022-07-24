@@ -21,5 +21,16 @@ namespace Sharp_blog.Controllers
             ViewBag.Title = "Latest Posts";
             return View("List", listViewModel);
         }
+
+
+        public ActionResult GetCategories(string category)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ActionResult GetTags(string tag)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
